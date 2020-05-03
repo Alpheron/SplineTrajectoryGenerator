@@ -1,15 +1,17 @@
 import random
 
-from Field import Field
-from Pose import Pose2D
+from NeuralNetworks.Field import Field
+from NeuralNetworks.Pose import Pose2D
 
 
 def randomGenerateStartEndPose():
-    randomStartPose = Pose2D((random.uniform(0, Field.x)), (random.uniform(0, Field.y)),
+    random_start_pose = Pose2D((random.uniform(0, Field.x)), (random.uniform(0, Field.y)),
+                               (random.uniform(0, Field.theta)))
+    random_end_pose = Pose2D((random.uniform(0, Field.x)), (random.uniform(0, Field.y)),
                              (random.uniform(0, Field.theta)))
-    randomEndPose = Pose2D((random.uniform(0, Field.x)), (random.uniform(0, Field.y)), (random.uniform(0, Field.theta)))
 
 
+'''
 def update():
     randomGenerateStartEndPose()
     block_pos = getBlockerNetworkEstimate()
@@ -29,3 +31,4 @@ def update():
 
     learnPlannerQfromExperienceReplay()
     learnBlockerQfromExperienceReplay()
+'''
