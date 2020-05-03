@@ -1,1 +1,1 @@
-Machine Learning to gnerate paths.
+Trajectory Generation through Adversarial Actor Critic Deep Neural Networks
