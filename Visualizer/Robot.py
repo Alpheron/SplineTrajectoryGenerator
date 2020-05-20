@@ -1,20 +1,13 @@
-import Visualizer.Main
 from NeuralNetworks.Pose import Pose2D
+from Visualizer.Utils import loadImage
+from Visualizer.Utils import scaledVal
 
 
 class Robot:
-    def __init__(self, x, y, theta):
-        self.x = x
-        self.y = y
-        self.theta = theta
-        self.robotPose = Pose2D(self.scaledX(x), self.scaledY(y), self.theta)
+    def __init__(self):
+        loadImage(18, '/home/tinku/SplineTrajectoryGenerator/Visualizer/Assets/Robot.png')
 
-    def scaledX(self, x):
-        scaledX = x * Visualizer.Main.Main.screenHeight
-        return scaledX
-
-    def scaledY(self, y):
-        scaledY = y * Visualizer.Main.Main.screenHeight
-        return scaledY
-
-    # def loadImage(self, pathToImage):
+    # @:param Pose2D instance of new pose where robot should be
+    def setPosition(self, pose):
+        robotPose = Pose2D(scaledVal(pose.x), scaledVal(pose.y), pose.theta)
+        return robotPose
