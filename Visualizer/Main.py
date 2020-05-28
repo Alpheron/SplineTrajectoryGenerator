@@ -1,8 +1,9 @@
 import pygame
 
+from Visualizer.Utils import screenHeight
+
 
 class Main:
-    screenHeight = 800
 
     def __init__(self, winSize=screenHeight):
         started = False

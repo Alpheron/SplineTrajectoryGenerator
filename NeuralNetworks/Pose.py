@@ -3,9 +3,10 @@ import random
 
 import numpy as np
 
+from Visualizer.Utils import constraint
+
 
 class Pose2D:
-    constraint = 72
 
     def __init__(self, x, y, theta, sizeConstraint=constraint):
         self.x = np.clip(x, a_min=-sizeConstraint, a_max=sizeConstraint)
@@ -19,6 +20,6 @@ class Pose2D:
         return result
 
     def random(self):
-        randPose = Pose2D((random.uniform(-Pose2D.constraint, Pose2D.constraint)),
-                          random.uniform(-Pose2D.constraint, Pose2D.constraint), (random.random()))
+        randPose = Pose2D((random.uniform(-constraint, constraint)),
+                          random.uniform(-constraint, constraint), (random.random()))
         return randPose
