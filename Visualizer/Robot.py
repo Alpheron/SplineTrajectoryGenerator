@@ -3,7 +3,7 @@ from Visualizer.Utils import loadImage
 from Visualizer.Utils import scaledVal
 
 
-class Robot:
+class Robot(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image, self.rect = loadImage(18, '/home/tinku/SplineTrajectoryGenerator/Visualizer/Assets/Robot.png')
