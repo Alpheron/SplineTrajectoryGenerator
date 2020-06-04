@@ -6,9 +6,12 @@ from Visualizer.Utils import screenHeight
 
 
 class Main:
+    started = False
+    screen = pygame.display.set_mode([screenHeight, screenHeight])
 
     def __init__(self):
-        self.init()
+        self.createBackground()
+        self.createRobot()
 
     def createRobot(self):
         robot = Robot()
@@ -18,9 +21,12 @@ class Main:
         field = Field()
         return field
 
-    def init(self):
-        started = False
-        screen = pygame.display.set_mode([screenHeight, screenHeight])
-        self.createBackground()
-        self.createRobot()
-        return started, screen
+    def mainLoop(self):
+        # noinspection PyGlobalUndefined
+        global started
+        started = True
+        while started:
+            quitEvent = pygame.event.poll()
+            if quitEvent == pygame.QUIT:
+                started = False
+                break

@@ -1,6 +1,5 @@
 from NeuralNetworks.Pose import Pose2D
-from Visualizer.Utils import loadImage
-from Visualizer.Utils import scaledVal
+from Visualizer.Utils import loadImage, scaledVal
 
 
 class Robot(pygame.sprite.Sprite):

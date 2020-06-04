@@ -8,9 +8,9 @@ from Visualizer.Utils import constraint
 
 class Pose2D:
 
-    def __init__(self, x, y, theta, sizeConstraint=constraint):
-        self.x = np.clip(x, a_min=-sizeConstraint, a_max=sizeConstraint)
-        self.y = np.clip(y, a_min=-sizeConstraint, a_max=sizeConstraint)
+    def __init__(self, x, y, theta):
+        self.x = np.clip(x, a_min=-constraint, a_max=constraint)
+        self.y = np.clip(y, a_min=-constraint, a_max=constraint)
         self.theta = self.angleWrap(theta)
 
     def angleWrap(self, angle):
