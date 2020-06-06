@@ -1,4 +1,4 @@
-from NeuralNetworks.Pose import Pose2D
+from neural_network.pose import Pose2D
 
 
 def randomGenerateStartEndPose():
