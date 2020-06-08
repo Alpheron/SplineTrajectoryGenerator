@@ -1,12 +1,12 @@
 import pygame
 
-SCREEN_HEIGHT = 800
+SCREEN_DIM = 800
 CONSTRAINT = 72
 
 
 # @:param value to scale to display size
 def scaled_value(x):
-    scaled_val = x * (SCREEN_HEIGHT / CONSTRAINT)
+    scaled_val = x * (SCREEN_DIM / (CONSTRAINT * 2))
     return scaled_val
 
 

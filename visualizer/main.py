@@ -5,28 +5,24 @@ import pygame
 from neural_network.pose import Pose2D
 from visualizer.field import Field
 from visualizer.robot import Robot
-from visualizer.utils import SCREEN_HEIGHT
+from visualizer.utils import SCREEN_DIM
 
 
 class Main:
-    started = False
-    screen = pygame.display.set_mode([SCREEN_HEIGHT, SCREEN_HEIGHT])
-    robot = Robot()
 
     def __init__(self):
-        self.createBackground()
+        self.started = False
+        self.screen = pygame.display.set_mode([SCREEN_DIM, SCREEN_DIM])
+        self.robot = Robot()
+        self.field = Field()
+        self.testPose = Pose2D(5, 6, 7)
+        pygame.init()
         self.mainLoop()
 
     def updateRobot(self, pose):
-        # noinspection PyGlobalUndefined
-        global robot
-        robot.update(Pose2D(pose.x, pose.y, pose.theta))
+        self.robot.setPosition(Pose2D(pose.x, pose.y, pose.theta))
 
-    def createBackground(self):
-        field = Field([0, 0])
-        return field
-
-    def quitLoop(self):
+    def quitLoopConditional(self):
         # noinspection PyGlobalUndefined
         global started
         for event in pygame.event.get():
@@ -40,7 +36,12 @@ class Main:
         global started
         started = True
         while started:
-            self.quitLoop()
+            self.quitLoopConditional()
+            self.screen.fill([255, 255, 255])
+            self.screen.blit(self.field.image, self.field.rect)
+            self.screen.blit(self.robot.image, self.robot.rect)
+            self.updateRobot(self.testPose.random())
+            pygame.display.update()
 
 
 if __name__ == '__main__':
