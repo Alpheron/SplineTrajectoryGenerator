@@ -4,9 +4,12 @@ SCREEN_DIM = 800
 CONSTRAINT = 72
 
 
-# @:param value to scale to display size
-def scaled_value(x):
-    scaled_val = x * (SCREEN_DIM / (CONSTRAINT * 2))
+# @:param value to scale to display size for global size
+def scaled_value(x, isRelative=False):
+    if isRelative is False:
+        scaled_val = x * (SCREEN_DIM / (CONSTRAINT * 2))
+    elif isRelative is not False:
+        scaled_val = (x - (-CONSTRAINT)) * (SCREEN_DIM / (CONSTRAINT * 2))
     return scaled_val
 
 

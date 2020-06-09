@@ -15,7 +15,7 @@ class Main:
         self.screen = pygame.display.set_mode([SCREEN_DIM, SCREEN_DIM])
         self.robot = Robot()
         self.field = Field()
-        self.testPose = Pose2D(5, 6, 7)
+        self.testPose = Pose2D()
         pygame.init()
         self.mainLoop()
 
@@ -39,8 +39,8 @@ class Main:
             self.quitLoopConditional()
             self.screen.fill([255, 255, 255])
             self.screen.blit(self.field.image, self.field.rect)
+            self.updateRobot(Pose2D(0, 0, 0))
             self.screen.blit(self.robot.image, self.robot.rect)
-            self.updateRobot(self.testPose.random())
             pygame.display.update()
 
 
