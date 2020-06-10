@@ -5,11 +5,14 @@ CONSTRAINT = 72
 
 
 # @:param value to scale to display size for global size
-def scaled_value(x, isRelative=False):
+def scaled_value(x, isRelative=False, isHeight=False):
+    scaled_val = None
     if isRelative is False:
-        scaled_val = x * (SCREEN_DIM / (CONSTRAINT * 2))
-    elif isRelative is not False:
-        scaled_val = (x - (-CONSTRAINT)) * (SCREEN_DIM / (CONSTRAINT * 2))
+        scaled_val = int(x * (SCREEN_DIM / (CONSTRAINT * 2)))
+    if isRelative is not False:
+        scaled_val = int((x - (-CONSTRAINT)) * (SCREEN_DIM / (CONSTRAINT * 2)))
+    if isHeight is not False and x is not 0:
+        scaled_val = -scaled_val
     return scaled_val
 
 
