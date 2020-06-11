@@ -24,11 +24,11 @@ class Main:
         self.robot.setPosition(Pose2D(pose.getX(), pose.getyY(), pose.getTheta()))
 
     def createPoints(self, startPose, endPose):
-        startPoint = Point(startPose.getX(), startPose.getY(), self.screen)
+        startPoint = Point(startPose.getX(), -startPose.getY(), self.screen)
         print(startPose.getX())
         print(startPose.getY())
         print("---------------------")
-        endPoint = Point(endPose.getX(), endPose.getY(), self.screen)
+        endPoint = Point(endPose.getX(), -endPose.getY(), self.screen)
         print(endPose.getX())
         print(endPose.getY())
         print("---------------------")
@@ -51,7 +51,7 @@ class Main:
             self.screen.fill([255, 255, 255])
             self.screen.blit(self.field.image, self.field.rect)
             self.screen.blit(self.robot.image, self.robot.rect)
-            self.createPoints(Pose2D(-36, 0), Pose2D(36, 1))
+            self.createPoints(Pose2D(-40, -40), Pose2D(72, 0))
             pygame.display.update()
 
 
