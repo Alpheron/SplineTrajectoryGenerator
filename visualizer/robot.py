@@ -1,3 +1,5 @@
+from math import degrees
+
 import pygame
 
 from visualizer.utils import load_image, scaled_value
@@ -19,7 +21,7 @@ class Robot(pygame.sprite.Sprite):
         return newRobotRect
 
     def rotate(self, angle):
-        rot_image = pygame.transform.rotate(self.image, (angle))
+        rot_image = pygame.transform.rotate(self.image, degrees(angle))
         rot_rect = rot_image.get_rect()
         rot_image = rot_image.subsurface(rot_rect).copy()
         self.transFormImage = rot_image
