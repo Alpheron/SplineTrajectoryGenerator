@@ -2,6 +2,7 @@ import pygame
 
 SCREEN_DIM = 800
 CONSTRAINT = 72
+DEFAULT_STEP_SIZE = 100
 
 
 # @:param value to scale to display size for global size

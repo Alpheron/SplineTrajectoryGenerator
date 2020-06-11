@@ -1,13 +1,11 @@
 import sys
-import time
+from math import radians, degrees
 
 import pygame
 
 from neural_network.pose import Pose2D
-from visualizer.field import Field
 from visualizer.point import Point
-from visualizer.robot import Robot
-from visualizer.utils import SCREEN_DIM
+from visualizer.utils import DEFAULT_STEP_SIZE
 
 
 class Main:
@@ -16,12 +14,14 @@ class Main:
         self.started = False
         self.startPose = startPose
         self.endPose = endPose
-        self.screen = pygame.display.set_mode([SCREEN_DIM, SCREEN_DIM])
-        self.robot = Robot(screen=self.screen)
-        self.field = Field(screen=self.screen)
-        self.testPose = Pose2D()
-        pygame.init()
-        self.mainLoop()
+        # self.screen = pygame.display.set_mode([SCREEN_DIM, SCREEN_DIM])
+        # self.robot = Robot(screen=self.screen)
+        # self.field = Field(screen=self.screen)
+        # self.poseList = []
+        # self.calculatePoses()
+        self.calculateHeading()
+        # pygame.init()
+        # self.mainLoop()
 
     def updateRobot(self, pose):
         self.screen.blit(self.robot.rotate(-pose.getTheta()), self.robot.move(pose.getX(), -pose.getY()))
@@ -40,19 +40,38 @@ class Main:
                 pygame.quit()
                 sys.exit()
 
+    def calculatePoses(self):
+        rateOfX = (self.endPose.getX() - self.startPose.getX()) / DEFAULT_STEP_SIZE
+        rateOfY = (self.endPose.getY() - self.startPose.getY()) / DEFAULT_STEP_SIZE
+        x = 0
+        while x < DEFAULT_STEP_SIZE:
+            x += 1
+            pose = Pose2D(self.startPose.getX() + (x * rateOfX), self.startPose.getY() + (x * rateOfY),
+                          self.startPose.getTheta())
+            print("Pose: " + str(pose.getX()) + ", " + str(pose.getY()) + ", " + str(pose.getTheta()))
+            self.poseList.append(pose)
+
+    def calculateHeading(self):
+        changeTheta = radians(self.startPose.getTheta()) - degrees(self.endPose.getTheta())
+        print(changeTheta)
+
     def mainLoop(self):
         # noinspection PyGlobalUndefined
         global started
         started = True
+        counter = 0
         while started:
             self.quitLoopConditional()
             self.screen.fill([255, 255, 255])
             self.screen.blit(self.field.image, self.field.rect)
             self.createPoints()
-            self.updateRobot(self.startPose)
-            time.sleep(2)
+            try:
+                self.updateRobot(self.poseList[counter])
+            except IndexError:
+                pass
+            counter += 1
             pygame.display.update()
 
 
 if __name__ == '__main__':
-    window = Main(Pose2D(-36, 0, 40), Pose2D(56, 37, 42))
+    window = Main(Pose2D(-72, 0, 0), Pose2D(56, 37, 45))
