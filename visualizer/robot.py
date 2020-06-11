@@ -1,21 +1,29 @@
+from math import degrees
+
 import pygame
 
-from visualizer.utils import load_image
+from visualizer.utils import load_image, scaled_value
 
 
 class Robot(pygame.sprite.Sprite):
 
-    def __init__(self):
+    def __init__(self, screen):
         pygame.sprite.Sprite.__init__(self)
         self.image = load_image(18, '/home/tinku/SplineTrajectoryGenerator/visualizer/assets/Robot.png')
         self.rect = self.image.get_rect()
         self.rect.center = [400, 400]
+        self.screen = screen
 
-    # @:param Pose2D instance of new pose where robot should be
-    def setPosition(self, pose):
-        self.rect.center = [750, 100]
-        # robotPose = Pose2D(scaled_value(pose.x, isRelative=True), scaled_value(pose.y, isRelative=True), pose.theta)
-        # print(robotPose.y)
-        # surface = pygame.Surface((self.rect.width, self.rect.height))
-        # newPose = pygame.transform.rotate(surface, -robotPose.theta)
-        # return newPose
+    def move(self, x, y):
+        newRobotRect = tuple([scaled_value(x, isRelative=True), scaled_value(y, isRelative=True)])
+        print(scaled_value(x, isRelative=True))
+        print(scaled_value(y, isRelative=True))
+        return newRobotRect
+
+    def rotate(self, angle):
+        rot_image = pygame.transform.rotate(self.image, degrees(angle))
+        rot_rect = rot_image.get_rect()
+        rot_image = rot_image.subsurface(rot_rect).copy()
+        rot_rect.clamp(self.screen.get_rect())
+        # print(self.screen.get_rect())
+        return rot_image

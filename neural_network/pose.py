@@ -39,5 +39,5 @@ class Pose2D:
     def random(self):
         randPose = Pose2D((random.uniform(-CONSTRAINT, CONSTRAINT)),
                           random.uniform(-CONSTRAINT, CONSTRAINT),
-                          self.angleWrap(random.random()))
+                          self.angleWrap(random.uniform(-10, 10)))
         return randPose
