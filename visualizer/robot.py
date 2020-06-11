@@ -25,5 +25,4 @@ class Robot(pygame.sprite.Sprite):
         rot_rect = rot_image.get_rect()
         rot_image = rot_image.subsurface(rot_rect).copy()
         rot_rect.clamp(self.screen.get_rect())
-        # print(self.screen.get_rect())
         return rot_image

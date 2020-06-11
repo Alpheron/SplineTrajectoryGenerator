@@ -7,6 +7,7 @@ from neural_network.pose import Pose2D
 from visualizer.field import Field
 from visualizer.point import Point
 from visualizer.robot import Robot
+from visualizer.trail import Trail
 from visualizer.utils import SCREEN_DIM
 
 
@@ -23,6 +24,7 @@ class Main:
 
     def updateRobot(self, pose):
         self.screen.blit(self.robot.rotate(-pose.getTheta()), self.robot.move(pose.getX(), -pose.getY()))
+        trail = Trail(pose.getX(), -pose.getY(), self.screen)
 
     def createPoints(self, startPose, endPose):
         startPoint = Point(startPose.getX(), -startPose.getY(), self.screen)
