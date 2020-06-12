@@ -1,8 +1,18 @@
+import sys
+
 import pygame
 
 SCREEN_DIM = 800
 CONSTRAINT = 72
 DEFAULT_STEP_SIZE = 100
+
+
+def quitLoopConditional(started):
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            started = False
+            pygame.quit()
+            sys.exit()
 
 
 # @:param value to scale to display size for global size

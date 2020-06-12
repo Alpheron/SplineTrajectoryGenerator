@@ -1,15 +1,12 @@
-import sys
-
 import pygame
 
 from neural_network.pose import Pose2D
 from visualizer.sprites.field import Field
 from visualizer.sprites.point import Point
 from visualizer.sprites.robot import Robot
-from visualizer.sprites.trail import Trail
 from visualizer.utilities.data_logger import DataLogger
 from visualizer.utilities.trajectory import Trajectory
-from visualizer.utilities.utils import SCREEN_DIM
+from visualizer.utilities.utils import SCREEN_DIM, quitLoopConditional
 
 
 class Main:
@@ -18,58 +15,24 @@ class Main:
         self.started = False
         self.trajectory = trajectory
         self.screen = pygame.display.set_mode([SCREEN_DIM, SCREEN_DIM])
-        self.robot = Robot(screen=self.screen)
+        self.robot = Robot(trajectory=self.trajectory, screen=self.screen)
         self.field = Field(screen=self.screen)
+        self.points = Point(self.trajectory, self.screen)
         self.trailList = []
         self.DataLogger = DataLogger(self.screen)
         pygame.init()
         self.mainLoop()
 
-    def updateRobot(self, pose):
-        self.screen.blit(self.robot.rotate(-pose.getTheta()), self.robot.move(pose.getX(), -pose.getY()))
-        self.trailList.append(pose)
-
-    def createTrail(self):
-        x = 0
-        while x < len(self.trailList):
-            Trail(self.trailList[x], self.screen)
-            x += 1
-
-    def createPoints(self):
-        startPoint = Point(self.trajectory[0].getX(), -self.trajectory[0].getY(), self.screen)
-        endPoint = Point(self.trajectory[-1].getX(),
-                         -self.trajectory[-1].getY(), self.screen)
-        return startPoint, endPoint
-
-    def drawRobotAndTrail(self, counter):
-        try:
-            self.updateRobot(self.trajectory[counter])
-            self.createTrail()
-        except IndexError:
-            self.updateRobot(self.trajectory[-1])
-            self.createTrail()
-
-    def quitLoopConditional(self):
-        # noinspection PyGlobalUndefined
-        global started
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                started = False
-                pygame.quit()
-                sys.exit()
-
     def mainLoop(self):
-        # noinspection PyGlobalUndefined
-        global started
-        started = True
+        self.started = True
         counter = 0
-        while started:
-            self.quitLoopConditional()
+        while self.started:
+            quitLoopConditional(self.started)
             self.screen.fill([255, 255, 255])
             self.screen.blit(self.field.image, self.field.rect)
+            self.points.createPoints()
             self.DataLogger.displayText("Test")
-            self.createPoints()
-            self.drawRobotAndTrail(counter)
+            self.robot.drawRobotAndTrail(counter)
             pygame.display.update()
             counter += 1
 

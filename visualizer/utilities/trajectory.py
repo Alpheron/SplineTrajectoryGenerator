@@ -50,3 +50,5 @@ class Trajectory:
 
     def end(self):
         self.poseList.append(self.endPose)
+        print(
+            "Pose: " + str(self.endPose.getX()) + ", " + str(self.endPose.getY()) + ", " + str(self.endPose.getTheta()))
