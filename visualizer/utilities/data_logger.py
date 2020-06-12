@@ -14,4 +14,3 @@ class DataLogger:
         TextSurf, TextRect = self.text_objects(text, largeText)
         TextRect.topleft = [0, 0]
         self.screen.blit(TextSurf, TextRect)
-        # self.screen.draw.text("X: " + pose.getX(), topleft=[0, 0])

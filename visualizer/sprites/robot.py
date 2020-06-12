@@ -18,7 +18,8 @@ class Robot(pygame.sprite.Sprite):
     def move(self, x, y):
         newRobotRect = self.transFormImage.get_rect()
         newRobotRect.center = tuple([scaled_value(x, isRelative=True), scaled_value(y, isRelative=True)])
-        return newRobotRect
+        constrainedRect = newRobotRect.clamp(self.screen.get_rect())
+        return constrainedRect
 
     def rotate(self, angle):
         rot_image = pygame.transform.rotate(self.image, degrees(angle))
