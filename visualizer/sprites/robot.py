@@ -2,7 +2,7 @@ from math import degrees
 
 import pygame
 
-from visualizer.utils import load_image, scaled_value
+from visualizer.utilities.utils import load_image, scaled_value
 
 
 class Robot(pygame.sprite.Sprite):

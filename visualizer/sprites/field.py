@@ -1,6 +1,6 @@
 import pygame
 
-from visualizer.utils import load_image
+from visualizer.utilities.utils import load_image
 
 
 class Field(pygame.sprite.Sprite):

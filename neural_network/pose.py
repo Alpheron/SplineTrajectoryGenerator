@@ -3,7 +3,7 @@ import random
 
 import numpy as np
 
-from visualizer.utils import CONSTRAINT
+from visualizer.utilities.utils import CONSTRAINT
 
 
 class Pose2D:
