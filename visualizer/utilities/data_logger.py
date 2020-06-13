@@ -10,7 +10,7 @@ class DataLogger:
         return textSurface, textSurface.get_rect()
 
     def displayText(self, text):
-        largeText = pygame.font.Font('/home/tinku/.local/share/fonts/JetBrainsMono-Bold.ttf', 50)
+        largeText = pygame.font.Font('/home/tinku/.local/share/fonts/JetBrainsMono-Bold.ttf', 20)
         TextSurf, TextRect = self.text_objects(text, largeText)
         TextRect.topleft = [0, 0]
         self.screen.blit(TextSurf, TextRect)

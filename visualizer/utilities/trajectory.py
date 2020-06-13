@@ -12,7 +12,7 @@ class Trajectory:
         self.counter = 0
 
     def simultaneousMotionTurn(self, pose2):
-        lastPosition = self.poseList[(self.counter * 100) - 1]
+        lastPosition = self.poseList[(self.counter * DEFAULT_STEP_SIZE) - 1]
         rateOfX = (pose2.getX() - lastPosition.getX()) / DEFAULT_STEP_SIZE
         rateOfY = (pose2.getY() - lastPosition.getY()) / DEFAULT_STEP_SIZE
         rateOfTheta = (pose2.getTheta() - lastPosition.getTheta()) / DEFAULT_STEP_SIZE
@@ -25,20 +25,21 @@ class Trajectory:
             x += 1
         self.counter += 1
 
-    def line(self, pose1, pose2):
-        rateOfX = (pose2.getX() - pose1.getX()) / DEFAULT_STEP_SIZE
-        rateOfY = (pose2.getY() - pose1.getY()) / DEFAULT_STEP_SIZE
+    def line(self, pose2):
+        lastPosition = self.poseList[(self.counter * DEFAULT_STEP_SIZE) - 1]
+        rateOfX = (pose2.getX() - lastPosition.getX()) / DEFAULT_STEP_SIZE
+        rateOfY = (pose2.getY() - lastPosition.getY()) / DEFAULT_STEP_SIZE
         x = 0
         while x < DEFAULT_STEP_SIZE:
-            pose = Pose2D(pose1.getX() + (x * rateOfX), pose1.getY() + (x * rateOfY),
-                          pose1.getTheta())
+            pose = Pose2D(lastPosition.getX() + (x * rateOfX), lastPosition.getY() + (x * rateOfY),
+                          lastPosition.getTheta())
             print("Pose: " + str(pose.getX()) + ", " + str(pose.getY()) + ", " + str(pose.getTheta()))
             self.poseList.append(pose)
             x += 1
         self.counter += 1
 
     def turn(self, pose1):
-        lastPosition = self.poseList[(self.counter * 100) - 1]
+        lastPosition = self.poseList[(self.counter * DEFAULT_STEP_SIZE) - 1]
         angleChange = (pose1.getTheta() - lastPosition.getTheta()) / DEFAULT_STEP_SIZE
         x = 0
         while x < DEFAULT_STEP_SIZE:

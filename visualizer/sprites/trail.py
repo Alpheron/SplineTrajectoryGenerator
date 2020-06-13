@@ -6,7 +6,7 @@ from visualizer.utilities.utils import scaled_value, SCREEN_DIM
 
 class Trail:
     def __init__(self, trailList, screen):
-        self.length = 2
+        self.length = 3
         self.trailList = trailList
         self.screen = screen
 
