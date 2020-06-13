@@ -27,7 +27,13 @@ def scaled_value(x, isRelative=False):
 
 # @:param size of the object in inches
 # @:param path to where the image of robot visualizer resides to load and scale to display size
-def load_image(size, pathToImage):
-    surface = pygame.image.load(pathToImage)
-    return pygame.transform.scale(surface, (int(scaled_value(size)),
-                                            int(scaled_value(size))))
+def load_image(size, pathToImage, alpha=None):
+    if alpha is None:
+        surface = pygame.image.load(pathToImage).convert()
+        return pygame.transform.scale(surface, (int(scaled_value(size)),
+                                                int(scaled_value(size))))
+
+    if alpha is not None:
+        surface = pygame.image.load(pathToImage).convert_alpha()
+        return pygame.transform.scale(surface, (int(scaled_value(size)),
+                                                int(scaled_value(size))))

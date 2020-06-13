@@ -10,7 +10,7 @@ class Robot(pygame.sprite.Sprite):
 
     def __init__(self, trajectory, screen):
         pygame.sprite.Sprite.__init__(self)
-        self.image = load_image(18, '/home/tinku/SplineTrajectoryGenerator/visualizer/assets/Robot.png')
+        self.image = load_image(18, '/home/tinku/SplineTrajectoryGenerator/visualizer/assets/Robot.png', alpha=True)
         self.transFormImage = None
         self.rect = self.image.get_rect()
         self.rect.center = [400, 400]

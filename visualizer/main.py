@@ -17,8 +17,7 @@ class Main:
     def __init__(self, trajectory):
         self.started = False
         self.trajectory = trajectory
-        flags = pygame.DOUBLEBUF
-        self.screen = pygame.display.set_mode([SCREEN_DIM, SCREEN_DIM], flags)
+        self.screen = pygame.display.set_mode([SCREEN_DIM, SCREEN_DIM])
         self.screen.set_alpha(None)
         pygame.event.set_allowed([pygame.QUIT])
         self.robot = Robot(trajectory=self.trajectory, screen=self.screen)
@@ -35,7 +34,7 @@ class Main:
         counter = 0
         while self.started:
             quitLoopConditional(self.started)
-            self.clock.tick(60)
+            self.clock.tick(70)
             self.screen.fill([255, 255, 255])
             self.screen.blit(self.field.image, self.field.rect)
             self.points.createPoints()
